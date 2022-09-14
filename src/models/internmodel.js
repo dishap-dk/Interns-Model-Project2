@@ -13,7 +13,7 @@ const internSchema = new mongoose.Schema({
         unique: true
     },
     mobile: {
-        type: Number,
+        type: String,
         require: true,
         match: [/^(\+\d{1,3}[- ]?)?\d{10}$/],
         unique: true
