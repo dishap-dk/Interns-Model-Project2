@@ -10,7 +10,8 @@ const internSchema = new mongoose.Schema({
         type: String,
         require: true,
         match:[/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/],
-        unique: true
+        unique: true,
+        lowercase:true
     },
     mobile: {
         type: String,
