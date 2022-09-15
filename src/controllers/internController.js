@@ -25,14 +25,15 @@ const getInters = async function (req, res) {
     try {
 
         if (Object.keys(data).length == 0) {
-            return res.status(400).send({ status: false, msg: "Please Give any input" })
+            return res.status(400).send({ status: false, message: "Please Give any input" })
         }
 
         let getCollege = await collegemodel.findOne({ name: data.collegeName, isDeleted: false })
-        console.log(getCollege)
+        // console.log(getCollege)
+        if(!data.collegeName)return res.status(400).send({status:false,message:"invalid query"})
 
         if (!getCollege) {
-            return res.status(400).send({ status: false, msg: "Give a valid registered Collegename" })
+            return res.status(400).send({ status: false, message: "Give a valid registered Collegename" })
         }
 
         let idOfCollege = getCollege._id.toString()

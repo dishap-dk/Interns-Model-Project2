@@ -27,6 +27,10 @@ const valiforcollege = async (req, res, next) => {
         if (!fullName) {
             return res.status(400).send({ status: false, message: " Please enter fullName, it's mandatory" })
         }
+        if(!/^[A-Z][A-Za-z\s]{1,}[\.]{0,1}[A-Z][A-Za-z\s]{0,}$/.test(fullName)){
+            return res.status(400).send({status:false,msg:"invalid format of full name"})
+        }
+
         fullName = fullName.trim().split(" ")
 
         for (let i = 0; i < fullName.length; i++) {
@@ -100,10 +104,10 @@ const valiforintern = async (req, res, next) => {
         //-------------validation for mobile
         let validMobile = /^(\+\d{1,3}[- ]?)?\d{10}$/
         if (!mobile) {
-            return res.status(400).send({ status: false, message: " mobile Number,  mandatory" })
+            return res.status(400).send({ status: false, message: " mobile Number  mandatory" })
         }
         if (!validMobile.test(mobile)) {
-            return res.status(400).send({ status: false, message: "Invalid length of Mobile Number" })
+            return res.status(400).send({ status: false, message: "Invalid length or mobile number" })
         }
         let Inter = await Internmodel.findOne({ mobile: mobile, isDeleted: false })
         if (Inter) {

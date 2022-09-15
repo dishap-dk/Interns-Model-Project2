@@ -5,6 +5,7 @@ const collegemodel = require('../models/collegeModel')
 const createCollege = async function (req, res) {
     try {
         let data = req.body
+        
         let save = await collegemodel.create(data)
         return res.status(201).send({ status: true, data: save })
     }

@@ -14,7 +14,7 @@ router.get("/functionup/collegeDetails",interncontroller.getInters);
 
 // -----------------------------------------------------errorHandling for wrong address--------------------------------------------------------
 router.all("/**", function (req, res) {         
-    res.status(404).send({
+    res.status(400).send({
         status: false,
         msg: "The api you request is not available"
     })
