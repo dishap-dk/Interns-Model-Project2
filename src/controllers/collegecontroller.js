@@ -1,5 +1,6 @@
-const collegemodel = require('../models/collegemodel')
+const collegemodel = require('../models/collegeModel')
 
+// --------------------------------------------POST API-createInterns----------------------------------------------
 
 const createCollege = async function (req, res) {
     try {
