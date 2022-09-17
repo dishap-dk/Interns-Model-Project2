@@ -1,8 +1,6 @@
 const Internmodel = require('../models/internModel')
 const collegemodel = require('../models/collegeModel')
 
-
-
 // ------------------------------------------------POST API creating Interns--------------------------------------------------
 const intern = async (req, res) => {
     try {
@@ -15,10 +13,6 @@ const intern = async (req, res) => {
         res.status(500).send({ status: false, message: err.message })
     }
 }
-
-
-
-
 // ----------------------------------------------------GET API getInternsDetails---------------------------------------------
 
 const getInters = async function (req, res) {
@@ -28,10 +22,10 @@ const getInters = async function (req, res) {
         if (Object.keys(data).length == 0) {
             return res.status(400).send({ status: false, message: "Please Give any input" })
         }
+        if(!data.collegeName)return res.status(400).send({status:false,message:"invalid query"})
 
         let getCollege = await collegemodel.findOne({ name: data.collegeName, isDeleted: false })
         // console.log(getCollege)
-        if(!data.collegeName)return res.status(400).send({status:false,message:"invalid query"})
 
         if (!getCollege) {
             return res.status(400).send({ status: false, message: "Give a valid registered Collegename" })
@@ -46,22 +40,19 @@ const getInters = async function (req, res) {
         }
 
         return res.status(200).send({
+            status:true,
             data: {
                 name: getCollege.name,
                 fullName: getCollege.fullName,
-                logoLink: getCollege.logoLink, intern: getCollegeInterns
+                logoLink: getCollege.logoLink, 
+                interns: getCollegeInterns
             }
         })
 
     } catch (error) {
         return res.status(500).send({ status: false, error: error.message })
     }
-
-
-
 }
-
-
 
 // ----------------------------------------------------exporting module---------------------------------------------------------
 module.exports.intern = intern

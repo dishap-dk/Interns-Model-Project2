@@ -27,7 +27,7 @@ const valiforcollege = async (req, res, next) => {
         if (!fullName) {
             return res.status(400).send({ status: false, message: " Please enter fullName, it's mandatory" })
         }
-        if(!/^[A-Z][A-Za-z\s]{1,}[\.]{0,1}[A-Z][A-Za-z\s]{0,}$/.test(fullName)){
+        if(!/^[A-Z][A-Za-z,\s]{1,}[\.]{0,1}[A-Z][A-Za-z\s]{0,}$/.test(fullName)){
             return res.status(400).send({status:false,msg:"invalid format of full name"})
         }
 
@@ -40,7 +40,7 @@ const valiforcollege = async (req, res, next) => {
                     status: false,
                     message: "the first letter of fullname must be in uppercase"
                 })
-            }
+            } 
         }
         //----------validation for logo link-------------------
         if (!logoLink) {
@@ -68,7 +68,6 @@ const valiforcollege = async (req, res, next) => {
         res.status(500).send({ status: false, message: err.message })
     }
 }
-
 
 // ---------------------------------------validation of Intern---------------------------------------
 const valiforintern = async (req, res, next) => {
@@ -114,14 +113,16 @@ const valiforintern = async (req, res, next) => {
             return res.status(400).send({ status: false, message: "This mobile Number already exist,Enter New Number" })
         }
         //-------------validation for College name
+        let validCollegeName = /^[a-z\s]{1,}[\.]{0,1}[a-z\s]{0,}$/
+
         if (!collegeName) {
             return res.status(400).send({ status: false, message: "Please provide collegename. it's mandatory" })
         }
       
-        if (!alphabets.test(collegeName)) {
+        if (!validCollegeName.test(collegeName)) {
             return res.status(400).send({ status: false, message: "please enter valid format(for ex :Indian Institute)" })
         }
-        let collegebyname = await Collegemodel.findOne({ fullName: collegeName, isDeleted: false })
+        let collegebyname = await Collegemodel.findOne({ name: collegeName, isDeleted: false })
         if (!collegebyname) {
             return res.status(400).send({ status: false, message: "College not exist for this college name, Please check your collage Name" })
         }
@@ -138,12 +139,6 @@ const valiforintern = async (req, res, next) => {
         res.status(500).send({ status: false, message: err.message })
     }
 }
-
-
-
-
-
-
 
 
 
