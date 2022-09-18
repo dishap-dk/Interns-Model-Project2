@@ -1,7 +1,7 @@
 const collegemodel = require('../models/collegeModel')
 
-// --------------------------------------------POST API-createInterns----------------------------------------------
 
+//POST API-createCollege
 const createCollege = async function (req, res) {
     try {
         let data = req.body
