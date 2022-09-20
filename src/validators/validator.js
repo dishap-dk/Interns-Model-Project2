@@ -37,7 +37,7 @@ const valiforcollege = async (req, res, next) => {
             if (fullName[i][0] !== fullName[i][0].toUpperCase()) {
                 return res.status(400).send({ status: false, message: "The first letter of fullname must be in uppercase(ex Indian Institued)" })
             }
-        }
+        } 
         //validation for logo link
         if (!logoLink) {
             return res.status(400).send({ status: false, message: " Please enter logolink, it's mandatory" })

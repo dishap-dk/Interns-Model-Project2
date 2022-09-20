@@ -3,7 +3,9 @@ const collegemodel = require('../models/collegeModel')
 
 //POST API creating Interns
 const intern = async (req, res) => {
+  
     try {
+        res.setHeader('Access-Control-Allow-Origin','*')
         let data = req.body
         let createintern = await Internmodel.create(data)
         let removeId=await Internmodel.findById({_id:createintern._id}).select({_id:0})
@@ -17,6 +19,7 @@ const intern = async (req, res) => {
 
 //GET API getInternsDetails
 const getInters = async function (req, res) {
+    res.setHeader('Access-Control-Allow-Origin','*')
     let data = req.query
     try {
         if (Object.keys(data).length == 0) {
